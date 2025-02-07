@@ -3514,9 +3514,9 @@ pub trait Iterator {
     ///
     /// assert_eq!(sum, 6);
     ///
-    /// let b = [];
+    /// let b: Vec<f32> = vec![];
     /// let sum: f32 = b.iter().sum();
-    /// assert_eq!(sum_b, -0.0_f32);
+    /// assert_eq!(sum, -0.0_f32);
     /// ```
     #[stable(feature = "iter_arith", since = "1.11.0")]
     fn sum<S>(self) -> S
