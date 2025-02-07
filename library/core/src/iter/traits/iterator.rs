@@ -3493,7 +3493,9 @@ pub trait Iterator {
     ///
     /// Takes each element, adds them together, and returns the result.
     ///
-    /// An empty iterator returns the zero value of the type.
+    /// An empty iterator returns the zero value of the type except in the event
+    /// of summing primitive types that have negative zero values like f32 and f64.
+    /// An empty iterator of these types will return the negative zero value.
     ///
     /// `sum()` can be used to sum any type implementing [`Sum`][`core::iter::Sum`],
     /// including [`Option`][`Option::sum`] and [`Result`][`Result::sum`].
@@ -3511,6 +3513,10 @@ pub trait Iterator {
     /// let sum: i32 = a.iter().sum();
     ///
     /// assert_eq!(sum, 6);
+    ///
+    /// let b = [];
+    /// let sum: f32 = b.iter().sum();
+    /// assert_eq!(sum_b, -0.0_f32);
     /// ```
     #[stable(feature = "iter_arith", since = "1.11.0")]
     fn sum<S>(self) -> S
